@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package keyvent;
+
+message EntityId {
+     string value = 1;
+}
+
+message CommandId {
+     string value = 1;
+}
+
+message UnitOfWorkId {
+     string value = 1;
+}
+
+message Version {
+     int64 value = 1;
+}
+
+/*
+message UnitOfWork {
+   required UnitOfWorkId unitOfWorkId = 1;
+   required CommandId commandId = 2;
+   required EntityId entityId = 3;
+   required Version version = 5;
+   repeated
+}*/
