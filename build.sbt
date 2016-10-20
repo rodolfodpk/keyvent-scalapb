@@ -1,7 +1,8 @@
 scalaVersion := "2.11.8"
 
 PB.targets in Compile := Seq(
-  scalapb.gen() -> (sourceManaged in Compile).value
+  scalapb.gen(singleLineToString = true) -> (sourceManaged in Compile).value
+
 )
 
 // scalapb and json
@@ -13,4 +14,3 @@ libraryDependencies ++= Seq(
   "io.grpc" % "grpc-netty" % "1.0.1",
   "com.trueaccord.scalapb" %% "scalapb-runtime-grpc" % "0.5.43"
 )
-

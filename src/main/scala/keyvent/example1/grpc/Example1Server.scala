@@ -35,9 +35,9 @@ class Example1Server(executionContext: ExecutionContext) { self =>
 
     Runtime.getRuntime.addShutdownHook(new Thread() {
       override def run(): Unit = {
-        System.err.println("*** shutting down gRPC server since JVM is shutting down")
+        println("*** shutting down gRPC server since JVM is shutting down")
         self.stop()
-        System.err.println("*** server shut down")
+        println("*** server shut down")
       }
     })
 
@@ -57,11 +57,15 @@ class Example1Server(executionContext: ExecutionContext) { self =>
 
   private class CustomerCommandsImpl extends CustomerCommandsGrpc.CustomerCommands {
     override def create(cmd: CreateCustomer) = {
-      val reply = CommandReply()
+      println("*** create " + cmd)
+      val reply = CommandReply(Some("created"))
+      println("*** reply " + reply)
       Future.successful(reply)
     }
     override def activate(cmd: ActivateCustomer) = {
-      val reply = CommandReply()
+      println("*** activate " + cmd)
+      val reply = CommandReply(Some("activated"))
+      println("*** reply " + reply)
       Future.successful(reply)
     }
   }
