@@ -44,7 +44,7 @@ class Example1Client private(
     logger.info("Will try to submit command " + cmd + " ...")
     try {
       val response = blockingStub.create(cmd)
-      logger.info("Response: " + response.message)
+      logger.info("Response: " + response)
     }
     catch {
       case e: StatusRuntimeException =>

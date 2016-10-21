@@ -23,7 +23,7 @@ message CreateCustomer {
 message ActivateCustomer {
     option (scalapb.message).extends = "keyvent.core.Command";
     required CommandId commandId = 1;
-    optional EntityId entityId =2;
+    required EntityId entityId =2;
     optional string bar = 3;
 }
 
@@ -38,13 +38,27 @@ message CustomerActivated {
     optional string bar = 2;
 }
 
+// unit of work
+
+message CompanyEvent {
+    oneof test_oneof {
+        CustomerCreated created = 1;
+        CustomerActivated activated = 2;
+    }
+}
+
+message CompanyUnitOfWork { // TODO add timestamp
+    option (scalapb.message).extends = "keyvent.core.UnitOfWork";
+    required UnitOfWorkId unitOfWorkId = 1;
+    required CommandId commandId = 2;
+    required EntityId entityId = 3;
+    required Version version = 4;
+    repeated CompanyEvent events = 5;
+}
+
 // services
 
 service CustomerCommands {
-    rpc Create (CreateCustomer) returns (CommandReply) {}
-    rpc Activate (ActivateCustomer) returns (CommandReply) {}
-}
-
-message CommandReply {
-    optional string message = 1; // should be a Try.of instead
+    rpc Create (CreateCustomer) returns (CompanyUnitOfWork) {}
+    rpc Activate (ActivateCustomer) returns (CompanyUnitOfWork) {}
 }

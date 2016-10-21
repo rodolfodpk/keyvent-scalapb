@@ -17,12 +17,3 @@ message UnitOfWorkId {
 message Version {
      int64 value = 1;
 }
-
-/*  TODO each aggregate has an Uow  + list of events as repeated wrapper bean (any of events??)
-message UnitOfWork {
-   required UnitOfWorkId unitOfWorkId = 1;
-   required CommandId commandId = 2;
-   required EntityId entityId = 3;
-   required Version version = 5;
-   repeated
-}*/
