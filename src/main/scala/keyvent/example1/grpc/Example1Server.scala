@@ -67,7 +67,7 @@ class Example1Server(executionContext: ExecutionContext) { self =>
     }
     override def activate(cmd: ActivateCustomer) = {
       println("*** activate " + cmd)
-      val reply = CompanyUnitOfWork(UnitOfWorkId("uow-2"), cmd.commandId, cmd.entityId, Version(1L),
+      val reply = CompanyUnitOfWork(UnitOfWorkId("uow-2"), cmd.commandId, cmd.entityId, Version(2L),
         Seq(CompanyEvent(Activated(CustomerActivated(cmd.entityId)))))
       println("*** reply " + reply)
       Future.successful(reply)
