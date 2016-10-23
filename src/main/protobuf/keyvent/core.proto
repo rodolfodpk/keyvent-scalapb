@@ -17,3 +17,19 @@ message UnitOfWorkId {
 message Version {
      int64 value = 1;
 }
+
+// command handling
+
+message ValidationSuccess {}
+
+message ValidationError {
+    repeated string descriptions = 1;
+}
+
+message CommandValidation {
+    oneof test_oneof {
+        ValidationSuccess success = 1;
+        ValidationError error =2;
+    }
+}
+

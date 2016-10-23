@@ -40,25 +40,25 @@ message CustomerActivated {
 
 // unit of work
 
-message CompanyEvent {
+message CustomerEvent {
     oneof test_oneof {
         CustomerCreated created = 1;
         CustomerActivated activated = 2;
     }
 }
 
-message CompanyUnitOfWork { // TODO add timestamp
+message CustomerUnitOfWork { // TODO add timestamp
     option (scalapb.message).extends = "keyvent.core.UnitOfWork";
     required UnitOfWorkId unitOfWorkId = 1;
     required CommandId commandId = 2;
     required EntityId entityId = 3;
     required Version version = 4;
-    repeated CompanyEvent events = 5;
+    repeated CustomerEvent events = 5;
 }
 
 // services
 
 service CustomerCommands {
-    rpc Create (CreateCustomer) returns (CompanyUnitOfWork) {}
-    rpc Activate (ActivateCustomer) returns (CompanyUnitOfWork) {}
+    rpc Create (CreateCustomer) returns (CustomerUnitOfWork) {}
+    rpc Activate (ActivateCustomer) returns (CommandValidation) {}
 }
